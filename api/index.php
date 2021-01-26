@@ -23,6 +23,6 @@ if (file_exists($file_path)) {
     echo $res;
 }else{
     header("HTTP/1.1 404 Not Found");
-    include('404.html');
+    include('../404.html');
     exit;
 }
