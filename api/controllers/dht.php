@@ -3,11 +3,15 @@ class DhtController
 {
     public $code = 200;
     
-    public function get() :array
+    public function get($arg1=null) :array
     {
         $db = new DB();
         $sql = "SELECT * FROM dht";
-        return $db->select($sql);
+        if($arg1 === "last"){
+            return end($db->select($sql));
+        }else{
+            return $db->select($sql);
+        }
     }
 
     public function post() :array
