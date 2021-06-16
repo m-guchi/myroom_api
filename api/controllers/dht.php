@@ -20,16 +20,18 @@ class DhtController
         if(array_key_exists("time", $post)
             && array_key_exists("temp", $post)
             && array_key_exists("humid", $post)
+            && array_key_exists("press", $post)
         ){
             $pdo = new DB();
             $sql = "INSERT INTO dht 
-                    (time,temp,humid)
+                    (time,temp,humid,press)
                 VALUES 
-                    (:time,:temp,:humid)";
+                    (:time,:temp,:humid,:press)";
             $sth = $pdo->pdo()->prepare($sql);
             $sth->bindValue(':time', $post["time"]);
             $sth->bindValue(':temp', $post["temp"]);
             $sth->bindValue(':humid', $post["humid"]);
+            $sth->bindValue(':press', $post["press"]);
             return ["ok" => $sth->execute()];
         }else{
             return ["ok" => false];
