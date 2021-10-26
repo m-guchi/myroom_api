@@ -9,8 +9,19 @@ class DhtController
         $sql = "SELECT * FROM dht";
         if($arg1 === "last"){
             return end($db->select($sql));
-        }else{
+        }else if($arg1 === "all"){
             return $db->select($sql);
+        }else{
+            if(!empty($_GET["num"]) && is_numeric($_GET["num"]) && $_GET["num"]>0){
+                $num = $_GET["num"];
+                $arr = array_reverse(array_slice($db->select($sql), -1*$num, $num));
+                $filter_arr = array_filter($arr, function($key){
+                    $div = ceil(($_GET["num"]+1)/1009);
+                    return $key % $div === 0;
+                },ARRAY_FILTER_USE_KEY);
+                return array_values($filter_arr);
+            }
+            return end($db->select($sql));
         }
     }
 

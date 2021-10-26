@@ -1,5 +1,5 @@
 <?php
-include(__DIR__ . '/../DB.php');
+include(__DIR__ . '/../../config/db_myroom.php');
 
 function htmlescape($val){
     return htmlspecialchars($val);
@@ -23,6 +23,6 @@ if (file_exists($file_path)) {
     echo $res;
 }else{
     header("HTTP/1.1 404 Not Found");
-    include('../404.html');
+    echo "";
     exit;
 }
